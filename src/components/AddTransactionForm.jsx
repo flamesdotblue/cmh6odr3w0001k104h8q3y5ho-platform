@@ -22,7 +22,7 @@ export default function AddTransactionForm({ onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-white/5 p-4 space-y-3">
+    <form id="add-form" onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-white/5 p-4 space-y-3">
       {error && (
         <div className="text-xs text-rose-400">{error}</div>
       )}

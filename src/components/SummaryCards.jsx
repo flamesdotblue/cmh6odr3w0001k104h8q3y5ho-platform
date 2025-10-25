@@ -3,7 +3,7 @@ import { ArrowDownCircle, ArrowUpCircle } from 'lucide-react';
 function Stat({ label, value, icon: Icon, accent = 'emerald' }) {
   const color = accent === 'emerald' ? 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20' : accent === 'rose' ? 'text-rose-400 bg-rose-400/10 border-rose-400/20' : 'text-white bg-white/5 border-white/10';
   return (
-    <div className={`flex items-center justify-between rounded-2xl border ${color.split(' ').slice(-1)} p-4 bg-white/5`}> 
+    <div className={`flex items-center justify-between rounded-2xl border ${color.split(' ').slice(-1)} p-4 bg-white/5`}>
       <div className="flex items-center gap-3">
         <div className={`inline-flex items-center justify-center rounded-xl border ${color} w-10 h-10`}>
           <Icon className={`w-5 h-5 ${color.split(' ')[0]}`} />

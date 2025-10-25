@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import Hero from './components/Hero';
-import SummaryCards from './components/SummaryCards';
-import AddTransactionForm from './components/AddTransactionForm';
-import TransactionList from './components/TransactionList';
+import SplashScreen from './components/SplashScreen';
+import MobileNav from './components/MobileNav';
+import HomeScreen from './components/HomeScreen';
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [transactions, setTransactions] = useState(() => {
     try {
       const cached = localStorage.getItem('mtx:transactions');
@@ -13,6 +13,11 @@ function App() {
       return [];
     }
   });
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowSplash(false), 1400);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     try {
@@ -42,21 +47,24 @@ function App() {
     };
   }, [transactions]);
 
+  const handleAddPress = () => {
+    const el = document.getElementById('add-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.querySelector('input,button,select,textarea')?.focus?.();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
-      <Hero />
-
-      <main className="mx-auto w-full max-w-md px-4 -mt-10 pb-24">
-        <SummaryCards totals={totals} />
-
-        <div className="mt-6">
-          <AddTransactionForm onAdd={addTransaction} />
-        </div>
-
-        <div className="mt-6">
-          <TransactionList transactions={transactions} onDelete={deleteTransaction} />
-        </div>
-      </main>
+      {showSplash && <SplashScreen />}
+      <HomeScreen
+        totals={totals}
+        transactions={transactions}
+        onAdd={addTransaction}
+        onDelete={deleteTransaction}
+      />
+      <MobileNav onAddPress={handleAddPress} />
     </div>
   );
 }
